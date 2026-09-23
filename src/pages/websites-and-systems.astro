@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTAButton from '../components/CTAButton.astro';
+import SystemFlow from '../components/SystemFlow.astro';
+import PricingSection from '../components/PricingSection.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { getService } from '../data/services';
+
+const website = getService('website');
+const crm = getService('crm');
+const pos = getService('crm-pos');
+const custom = getService('custom');
+
+const options = ['A website', 'A website with ongoing care', 'A CRM', 'A CRM with payments and POS', 'A connected combination'];
+const careItems = [
+  { t: 'Hosting', d: 'Fast, reliable hosting set up and managed for you.' },
+  { t: 'Security', d: 'Secure connections and security updates handled for you.' },
+  { t: 'Backups', d: 'Regular backups so your site can be restored if something goes wrong.' },
+  { t: 'Technical updates', d: 'Keeping the site current so it keeps working the way it should.' },
+  { t: 'Small changes', d: 'New hours, a new photo, an updated service. Just ask.' },
+  { t: 'Search visibility', d: 'Basic ongoing SEO so local customers can find you, plus simple analytics.' },
+];
+---
+<BaseLayout
+  title="Websites, Website Care & Business Systems in Tyler, TX"
+  description="Websites with ongoing care, Grizzly CRM, and CRM + POS for East Texas small businesses. Start with what you need and add the rest when it makes sense."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Websites &amp; Systems</span>
+      <h1>Start with what you need. Add the rest when it makes sense.</h1>
+      <p class="lead">Not every business needs a CRM or a point-of-sale system. Plenty of businesses just need a good website that someone keeps in good shape. You might only need:</p>
+      <ul class="options">{options.map((o) => <li>{o}</li>)}</ul>
+      <p class="note">Every service stands on its own. You are never required to buy the biggest plan.</p>
+      <nav class="jump" aria-label="On this page">
+        <a href="#website">Website</a><a href="#care">Website Care</a><a href="#crm">Grizzly CRM</a><a href="#crm-pos">CRM + POS</a><a href="#custom">Custom workflows</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 1. Website -->
+  <section class="section section--white" id="website" aria-labelledby="website-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">01 · Website</span>
+        <h2 id="website-title">A website that works as hard as you do.</h2>
+        <p class="lead">A modern site built for phones first, written in plain language, and set up so customers can reach you.</p>
+        <p>We plan the pages with you, help with the writing, and build a site that loads quickly and makes it obvious what to do next: call, book, request a quote, or stop by.</p>
+      </div>
+      <ul class="check-list feature-box">
+        <li>Mobile-first design</li>
+        <li>Clear pages for your services</li>
+        <li>Contact, quote, or booking forms that reach you</li>
+        <li>Local search basics built in from the start</li>
+        <li>Fast load times</li>
+        <li>Your logo, your colors, your photos</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. Website Care -->
+  <section class="section" id="care" aria-labelledby="care-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">02 · Website Care</span>
+        <h2 id="care-title">Keep it running without becoming your own web department.</h2>
+        <p class="lead">{website.message} Website Care is the monthly plan that keeps your site healthy after launch.</p>
+      </div>
+      <ul class="care-grid">
+        {careItems.map((c) => <li class="reveal"><h3>{c.t}</h3><p>{c.d}</p></li>)}
+      </ul>
+      <p class="structure"><strong>How it's priced:</strong> a one-time setup and build, then a monthly Website Care plan. {website.setupCovers} The monthly plan covers {website.monthlyCovers.charAt(0).toLowerCase() + website.monthlyCovers.slice(1)}</p>
+    </div>
+  </section>
+
+  <!-- 3. CRM -->
+  <section class="section section--white" id="crm" aria-labelledby="crm-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">03 · {crm.name}</span>
+        <h2 id="crm-title">Your customers and leads in one place.</h2>
+        <p class="lead">{crm.message}</p>
+        <p>Grizzly CRM gives you one place for the people your business works with: who reached out, who you need to follow up with, and what happened last time. It is set up around the way your business works, not a generic template.</p>
+        <p class="structure"><strong>How it's priced:</strong> a one-time setup, then a monthly plan for hosting, support, and updates.</p>
+      </div>
+      <ul class="check-list feature-box">{crm.features.map((f) => <li>{f}</li>)}</ul>
+    </div>
+  </section>
+
+  <!-- 4. CRM + POS -->
+  <section class="section" id="crm-pos" aria-labelledby="pos-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">04 · {pos.name}</span>
+        <h2 id="pos-title">Customers and payments in the same system.</h2>
+        <p class="lead">{pos.message}</p>
+        <p>CRM + POS adds selling and payments to the CRM. Take payments in person or online, set up recurring billing, and see every transaction next to the customer it belongs to. Payments are processed through Stripe where appropriate.</p>
+        <p class="ladder"><strong>Start with the CRM. Add POS and payments when the business needs them.</strong></p>
+      </div>
+      <ul class="check-list feature-box">{pos.features.map((f) => <li>{f}</li>)}</ul>
+    </div>
+  </section>
+
+  <!-- 5. Custom -->
+  <section class="section section--white" id="custom" aria-labelledby="custom-title">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">05 · {custom.name}</span>
+        <h2 id="custom-title">Adapted around the way your business works.</h2>
+        <p class="lead">{custom.message}</p>
+        <p>Custom work is built on top of Grizzly CRM or CRM + POS, not from scratch. That keeps it dependable and maintainable. Every piece is scoped and agreed on before work starts, so you know what you are getting.</p>
+      </div>
+      <ul class="check-list feature-box">{custom.features.map((f) => <li>{f}</li>)}</ul>
+    </div>
+  </section>
+
+  <!-- 6. How systems connect -->
+  <section class="section section--ink" aria-labelledby="connect-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it connects</span>
+        <h2 id="connect-title">One business. Tools that talk to each other.</h2>
+        <p class="lead">A form on your website can create a lead in your CRM. A booking can land on your calendar. A payment can show up on the customer's record. Connect only the pieces you use.</p>
+      </div>
+      <SystemFlow />
+    </div>
+  </section>
+
+  <!-- 7. Pricing (renders only when enabled in src/config/site.ts) -->
+  <PricingSection />
+
+  <!-- 8. CTA -->
+  <FinalCTA title="Not sure what you need?" body="That is normal. Tell us what is going on in the business and we will tell you honestly what would help, even if the answer is just a better website." />
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2.5rem, 6vw, 4rem); }
+  .page-hero h1 { max-width: 20ch; }
+  .options { list-style: none; padding: 0; margin: 1.25rem 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .options li { background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 0.45rem 1rem; font-weight: 600; font-size: 1rem; }
+  .note { color: var(--olive); font-weight: 600; }
+  .jump { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .jump a { font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
+
+  .split { display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 960px) { .split { grid-template-columns: 1.25fr 1fr; } }
+  .feature-box { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem 1.75rem; }
+  .section:not(.section--white) .feature-box { background: var(--white); }
+
+  .care-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+  .care-grid li { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.3rem 1.4rem; }
+  .care-grid h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+  .care-grid p { margin: 0; color: var(--text-muted); font-size: 1.02rem; }
+  .structure { margin-top: 2rem; padding: 1rem 1.25rem; background: var(--olive-100); border-radius: var(--radius); max-width: 52rem; font-size: 1.02rem; }
+  .ladder { font-family: var(--font-head); font-size: 1.15rem; color: var(--bear); border-left: 4px solid var(--tan); padding-left: 1rem; }
+</style>

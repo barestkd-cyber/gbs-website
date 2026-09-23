@@ -1,0 +1,84 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config/site';
+
+interface Props { title: string; description?: string; image?: string; noindex?: boolean }
+const { title, description = siteConfig.description, image = '/og-image.png', noindex = false } = Astro.props;
+
+const fullTitle = title.includes(siteConfig.businessName) ? title : `${title} | ${siteConfig.businessName}`;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1'), Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+const { contact } = siteConfig;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: siteConfig.businessName,
+  url: siteConfig.url,
+  logo: new URL('/brand/gbs-logo.png', Astro.site).href,
+  image: ogImage,
+  description: siteConfig.description,
+  address: { '@type': 'PostalAddress', addressLocality: contact.city, addressRegion: contact.region, addressCountry: 'US' },
+  areaServed: [
+    { '@type': 'City', name: 'Tyler, TX' },
+    { '@type': 'City', name: 'Whitehouse, TX' },
+    { '@type': 'City', name: 'Longview, TX' },
+    { '@type': 'Place', name: 'East Texas' },
+  ],
+  ...(contact.email ? { email: contact.email } : {}),
+  ...(contact.phone ? { telephone: contact.phone } : {}),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.businessName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Grizzly Business Systems logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#faf7f1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        }, { rootMargin: '0px 0px -8% 0px' });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

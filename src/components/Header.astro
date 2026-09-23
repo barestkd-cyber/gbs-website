@@ -1,0 +1,105 @@
+---
+import Logo from './Logo.astro';
+import CTAButton from './CTAButton.astro';
+import { navigation } from '../config/site';
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<header class="site-header">
+  <div class="container bar">
+    <a href="/" class="brand" aria-label="Grizzly Business Systems home">
+      <Logo width={118} eager />
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {navigation.filter((n) => n.href !== '/').map((item) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <CTAButton class="header-cta" />
+
+    <details class="mobile-menu">
+      <summary aria-label="Open menu">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="menu-word">Menu</span>
+      </summary>
+      <div class="mobile-panel">
+        <nav aria-label="Mobile">
+          <ul>
+            {navigation.map((item) => (
+              <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <CTAButton size="lg" />
+      </div>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgb(250 247 241 / 0.94);
+    backdrop-filter: saturate(1.2) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; gap: 1.5rem; min-height: 72px; }
+  .brand { display: block; flex: none; padding-block: 0.4rem; }
+  .nav { margin-left: auto; }
+  .nav ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+  .nav a {
+    display: block; padding: 0.55rem 0.8rem; border-radius: var(--radius);
+    font-family: var(--font-head); font-stretch: 104%; font-weight: 600; font-size: 0.97rem;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav a:hover { background: var(--sand-100); color: var(--ink); }
+  .nav a[aria-current='page'] { color: var(--bear); box-shadow: inset 0 -2px 0 var(--tan); border-radius: 0; }
+
+  .mobile-menu { display: none; margin-left: auto; }
+  .mobile-menu summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.6rem;
+    min-height: 44px; padding: 0 0.75rem; border: 1px solid var(--line); border-radius: var(--radius);
+    font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; background: var(--white);
+  }
+  .mobile-menu summary::-webkit-details-marker { display: none; }
+  .burger, .burger::before, .burger::after {
+    display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px; position: relative;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .burger::before, .burger::after { content: ''; position: absolute; left: 0; }
+  .burger::before { top: -6px; }
+  .burger::after { top: 6px; }
+  .mobile-menu[open] .burger { background: transparent; }
+  .mobile-menu[open] .burger::before { transform: translateY(6px) rotate(45deg); }
+  .mobile-menu[open] .burger::after { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-panel {
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--cream); border-bottom: 1px solid var(--line);
+    padding: 0.75rem var(--gutter) 1.5rem; box-shadow: 0 16px 24px -16px rgb(33 34 37 / 0.25);
+  }
+  .mobile-panel ul { list-style: none; margin: 0 0 1rem; padding: 0; }
+  .mobile-panel li + li { border-top: 1px solid var(--line); }
+  .mobile-panel a:not(.btn) {
+    display: block; padding: 0.9rem 0.25rem; text-decoration: none; color: var(--ink);
+    font-family: var(--font-head); font-weight: 700; font-size: 1.1rem;
+  }
+  .mobile-panel a[aria-current='page'] { color: var(--bear); }
+  .mobile-panel :global(.btn) { width: 100%; }
+
+  @media (max-width: 1020px) {
+    .nav { display: none; }
+    .mobile-menu { display: block; }
+  }
+  @media (max-width: 1020px) and (min-width: 640px) {
+    :global(.header-cta) { margin-left: auto; }
+    .mobile-menu { margin-left: 0; }
+  }
+  @media (max-width: 639px) {
+    :global(.header-cta) { display: none !important; }
+  }
+</style>

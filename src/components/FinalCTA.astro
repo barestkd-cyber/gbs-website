@@ -1,0 +1,26 @@
+---
+import CTAButton from './CTAButton.astro';
+interface Props { title?: string; body?: string }
+const {
+  title = 'What are you trying to fix?',
+  body = 'Whether you need a better website or your current tools are making the business harder than they should, tell us what is going on.',
+} = Astro.props;
+---
+<section class="final" aria-labelledby="final-title">
+  <div class="container inner reveal">
+    <img src="/brand/gbs-mark.png" alt="" width="72" height="72" loading="lazy" class="mark" />
+    <h2 id="final-title">{title}</h2>
+    <p class="lead">{body}</p>
+    <CTAButton size="lg" variant="light" />
+    <p class="note">The first conversation is free and short. No obligation.</p>
+  </div>
+</section>
+
+<style>
+  .final { background: var(--bear); color: var(--cream); padding-block: clamp(4rem, 9vw, 6.5rem); }
+  .inner { text-align: center; max-width: 46rem; }
+  .mark { margin: 0 auto 1.5rem; width: 64px; height: 64px; padding: 10px; border-radius: 50%; background: var(--cream); object-fit: contain; }
+  h2 { color: var(--white); }
+  .lead { color: #eadfcd; margin: 0 auto 2rem; }
+  .note { margin: 1.25rem 0 0; font-size: 0.98rem; color: #d9c9ae; }
+</style>

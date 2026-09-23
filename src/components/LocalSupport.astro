@@ -1,0 +1,34 @@
+---
+import { siteConfig } from '../config/site';
+const points = [
+  { title: 'Direct communication', body: 'You talk to the person who builds and supports your system.' },
+  { title: 'No giant support queue', body: 'No ticket numbers or waiting on someone who has never seen your setup.' },
+  { title: 'No agency handoffs', body: 'The work is not passed off to people you will never meet.' },
+  { title: 'Close to home', body: 'Based in East Texas, working with local business owners.' },
+];
+---
+<section class="section" aria-labelledby="local-title">
+  <div class="container local">
+    <div class="section-head">
+      <span class="eyebrow">Local</span>
+      <h2 id="local-title">Local service. Real support.</h2>
+      <p class="lead">Grizzly is based in East Texas and built around direct relationships with small-business owners. You can actually talk to the person building and supporting your system.</p>
+      <p class="area">{siteConfig.serviceAreaLine}</p>
+    </div>
+    <ul class="points">
+      {points.map((p) => (
+        <li class="reveal"><h3>{p.title}</h3><p>{p.body}</p></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .local { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .local { grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; } .section-head { margin-bottom: 0; } }
+  .area { font-weight: 700; color: var(--bear); }
+  .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+  li { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.3rem 1.4rem; border-left: 4px solid var(--tan); }
+  h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+  li p { margin: 0; color: var(--text-muted); font-size: 1.02rem; }
+</style>

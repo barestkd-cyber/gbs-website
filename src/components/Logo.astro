@@ -1,0 +1,17 @@
+---
+// The approved GBS logo. Do not swap for text or a redrawn mark.
+interface Props { width?: number; class?: string; eager?: boolean }
+const { width = 140, class: className, eager = false } = Astro.props;
+const height = Math.round(width * (487 / 921));
+---
+<picture class={className}>
+  <source srcset="/brand/gbs-logo.webp" type="image/webp" />
+  <img
+    src="/brand/gbs-logo.png"
+    alt="Grizzly Business Systems"
+    width={width}
+    height={height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+</picture>

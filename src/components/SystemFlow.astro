@@ -1,0 +1,48 @@
+---
+// Website -> CRM -> Calendar -> Payments -> Checkout -> Reporting
+const steps = [
+  { name: 'Website', note: 'Where customers find you', icon: 'M3 5h18v14H3zM3 9h18M7 7h.01M10 7h.01' },
+  { name: 'CRM', note: 'Every lead and customer', icon: 'M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M9.5 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM21 19v-1a4 4 0 0 0-3-3.87M16 3.13a3.5 3.5 0 0 1 0 6.75' },
+  { name: 'Calendar', note: 'Appointments and events', icon: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4' },
+  { name: 'Payments', note: 'One-time and recurring', icon: 'M3 6h18v12H3zM3 10h18M7 15h4' },
+  { name: 'Checkout', note: 'Selling online or in person', icon: 'M5 7h14l-1.5 9h-11zM9 7a3 3 0 0 1 6 0M9 20h.01M15 20h.01' },
+  { name: 'Reporting', note: 'What is actually happening', icon: 'M4 20V10M10 20V4M16 20v-7M22 20H2' },
+];
+---
+<ol class="flow" aria-label="How the pieces connect">
+  {steps.map((s, i) => (
+    <li class="node reveal" style={`transition-delay:${i * 60}ms`}>
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={s.icon} /></svg>
+      </span>
+      <span class="name">{s.name}</span>
+      <span class="note">{s.note}</span>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+  .node {
+    position: relative; display: grid; grid-template-columns: auto 1fr; column-gap: 1rem;
+    align-items: center; padding: 1rem 1.1rem; border-radius: var(--radius-lg);
+    background: rgb(255 255 255 / 0.06); border: 1px solid rgb(255 255 255 / 0.14);
+  }
+  .icon {
+    grid-row: span 2; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--cream); color: var(--bear);
+  }
+  .name { font-family: var(--font-head); font-stretch: 110%; font-weight: 800; font-size: 1.1rem; color: var(--white); }
+  .note { font-size: 0.95rem; color: #cfc6b6; }
+
+  .node:not(:last-child)::after {
+    content: ''; position: absolute; left: calc(1.1rem + 25px); top: 100%; width: 2px; height: 0.75rem; background: var(--tan);
+  }
+
+  @media (min-width: 900px) {
+    .flow { grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+    .node { grid-template-columns: 1fr; justify-items: center; text-align: center; row-gap: 0.4rem; padding: 1.4rem 0.75rem; }
+    .icon { grid-row: auto; margin-bottom: 0.3rem; }
+    .node:not(:last-child)::after { left: 100%; top: 50%; width: 1rem; height: 2px; }
+  }
+</style>

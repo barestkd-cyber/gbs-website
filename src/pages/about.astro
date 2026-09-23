@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { siteConfig } from '../config/site';
+
+const beliefs = [
+  { t: 'Start with the problem', d: 'We figure out what is actually getting in the way before recommending any tool.' },
+  { t: 'Only what you need', d: 'A website might be enough. If it is, that is what we will tell you.' },
+  { t: 'Plain language', d: 'No jargon, no pitch decks. Just a clear explanation of what we would build and why.' },
+  { t: 'Someone you can call', d: 'The person who built your system is the person who supports it.' },
+];
+---
+<BaseLayout
+  title="About Grizzly Business Systems"
+  description="Grizzly Business Systems started inside a real East Texas small business. We build websites and business systems that fit the way local businesses actually work."
+>
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">About</span>
+      <h1>Built by a small-business owner, for small-business owners.</h1>
+    </div>
+  </section>
+
+  <section class="section section--white story" aria-labelledby="story-title">
+    <div class="container narrow">
+      <h2 id="story-title" class="visually-hidden">Our story</h2>
+      <blockquote class="origin">
+        <p>I got tired of paying for software that didn't work the way my business worked, so I started building my own.</p>
+        <!-- TODO(owner): add founder name (and optional photo) for the attribution line. -->
+        <footer>Founder, Grizzly Business Systems &amp; Bares Taekwondo Fitness</footer>
+      </blockquote>
+
+      <p>Grizzly Business Systems started inside Bares Taekwondo Fitness, a martial arts school in Tyler, Texas. Running a brick-and-mortar business means juggling customers, schedules, memberships, payments, and a website every day. The software available for that work was either too expensive, too complicated, or built around someone else's way of doing things.</p>
+      <p>So we built our own. Member records, scheduling, check-in, checkout, recurring billing, agreements, and a website that connects to all of it. We use those systems every day to run the school.</p>
+      <p>Doing that made one thing obvious: plenty of small businesses are stuck with software that does not fit them. Grizzly exists to offer a more practical alternative.</p>
+      <p>We start with the real problem, not a pre-decided software package. For a lot of businesses the right answer is a better website and someone reliable to look after it. For others it is a CRM, payments, or a workflow built around how they already operate.</p>
+      <p>We don't claim to be experts in every industry. We do know what it is like to run a small business, and we know how to build tools that make that easier.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="beliefs-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How we work</span>
+        <h2 id="beliefs-title">Technology should fit the business, not the other way around.</h2>
+      </div>
+      <ul class="beliefs">
+        {beliefs.map((b) => <li class="reveal"><h3>{b.t}</h3><p>{b.d}</p></li>)}
+      </ul>
+      <p class="area">Based in East Texas. {siteConfig.serviceAreaLine}</p>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem); }
+  .narrow { max-width: 780px; }
+  .origin { margin: 0 0 2.5rem; padding: 0 0 0 1.5rem; border-left: 5px solid var(--tan); }
+  .origin p {
+    font-family: var(--font-head); font-stretch: 110%; font-weight: 800; font-size: clamp(1.45rem, 3.4vw, 2.05rem);
+    line-height: 1.22; color: var(--bear); margin-bottom: 0.9rem; text-wrap: balance;
+  }
+  .origin footer { color: var(--text-muted); font-size: 1rem; font-weight: 600; }
+  .story p { font-size: 1.15rem; }
+  .beliefs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .beliefs li { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.4rem; border-top: 4px solid var(--olive); }
+  .beliefs h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+  .beliefs p { margin: 0; color: var(--text-muted); font-size: 1.02rem; }
+  .area { margin-top: 2.5rem; font-weight: 700; color: var(--bear); }
+</style>

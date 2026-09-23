@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { publishedProjects } from '../data/projects';
+
+const internal = publishedProjects.filter((p) => p.internal);
+const clients = publishedProjects.filter((p) => !p.internal);
+---
+<BaseLayout
+  title="Our Work: Websites and Business Systems in East Texas"
+  description="Websites, CRMs, and connected business systems Grizzly Business Systems has built for businesses in Tyler and East Texas, including our own."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Our work</span>
+      <h1>Real work for real businesses.</h1>
+      <p class="lead">Every project here is live and in use. Each one shows what the business needed, what we built, and what became easier.</p>
+    </div>
+  </section>
+
+  <section class="section section--white cases" aria-labelledby="clients-title">
+    <div class="container">
+      <h2 id="clients-title" class="group-title">Client websites and systems</h2>
+      {clients.map((p) => <ProjectCard project={p} variant="case" />)}
+    </div>
+  </section>
+
+  <section class="section cases" aria-labelledby="own-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Built for ourselves first</span>
+        <h2 id="own-title">The system we run our own business on.</h2>
+        <p class="lead">Grizzly started inside Bares Taekwondo Fitness. The website, CRM, and payment tools we build for other businesses come from what we learned running this one.</p>
+      </div>
+      {internal.map((p) => <ProjectCard project={p} variant="case" />)}
+      <!-- TODO(owner): add BaresCRM screenshots (customer info removed) under public/work and reference them here. -->
+    </div>
+  </section>
+
+  <FinalCTA title="Want something like this for your business?" body="Tell us what you are working with today and what is getting in the way." />
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem); }
+  .group-title { font-size: clamp(1.4rem, 3vw, 1.8rem); margin-bottom: 0.5rem; }
+  .cases :global(.case:first-of-type) { border-top: 0; }
+</style>

@@ -1,0 +1,64 @@
+---
+// Structured setup + monthly pricing. Hidden until siteConfig.showPricing is true.
+// Amounts come only from src/data/services.ts; a service without a number never shows a price.
+import { siteConfig } from '../config/site';
+import { services } from '../data/services';
+import CTAButton from './CTAButton.astro';
+
+const usd = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+const enabled = siteConfig.showPricing && services.some((s) => s.setupPrice !== null || s.monthlyPrice !== null);
+---
+{enabled && (
+  <section class="section section--white" id="pricing" aria-labelledby="pricing-title">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Pricing</span>
+        <h2 id="pricing-title">Clear setup. Simple monthly.</h2>
+        <p class="lead">Every plan has a one-time setup and a monthly plan. You only pay for what your business uses.</p>
+      </div>
+      <div class="plans">
+        {services.map((s) => (
+          <article class="plan">
+            <h3>{s.name}</h3>
+            <dl>
+              <div>
+                <dt>Setup</dt>
+                <dd>
+                  {s.setupPrice !== null
+                    ? <><span class="amt">{s.startingAt && <small>from </small>}{usd(s.setupPrice)}</span><span class="per">one time</span></>
+                    : <span class="quote">Quoted after a short conversation</span>}
+                </dd>
+                <p class="covers">{s.setupCovers}</p>
+              </div>
+              <div>
+                <dt>Monthly</dt>
+                <dd>
+                  {s.monthlyPrice !== null
+                    ? <><span class="amt">{s.startingAt && <small>from </small>}{usd(s.monthlyPrice)}</span><span class="per">/ month</span></>
+                    : <span class="quote">Depends on what is built</span>}
+                </dd>
+                <p class="covers">{s.monthlyCovers}</p>
+              </div>
+            </dl>
+            <ul class="check-list">{s.features.slice(0, 4).map((f) => <li>{f}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+      <div class="cta"><CTAButton /></div>
+    </div>
+  </section>
+)}
+
+<style>
+  .plans { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .plan { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; background: var(--cream); display: flex; flex-direction: column; gap: 1.25rem; }
+  dl { margin: 0; display: grid; gap: 1rem; }
+  dt { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--olive); }
+  dd { margin: 0.2rem 0 0; display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; }
+  .amt { font-family: var(--font-head); font-stretch: 110%; font-weight: 800; font-size: 1.8rem; }
+  .amt small { font-size: 0.9rem; font-weight: 600; }
+  .per, .quote { color: var(--text-muted); font-size: 0.98rem; }
+  .covers { margin: 0.35rem 0 0; font-size: 0.95rem; color: var(--text-muted); }
+  .check-list { font-size: 0.98rem; margin-top: auto; }
+  .cta { text-align: center; margin-top: 2.5rem; }
+</style>

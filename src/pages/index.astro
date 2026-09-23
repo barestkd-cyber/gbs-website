@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTAButton from '../components/CTAButton.astro';
+import HeroVisual from '../components/HeroVisual.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SystemFlow from '../components/SystemFlow.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import LocalSupport from '../components/LocalSupport.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { siteConfig } from '../config/site';
+import { services } from '../data/services';
+import { featuredProjects } from '../data/projects';
+---
+<BaseLayout
+  title="Websites for Local Businesses in Tyler & East Texas | Grizzly Business Systems"
+  description="Professional websites, ongoing website care, and business systems for small businesses in Tyler, Whitehouse, Longview, and across East Texas."
+>
+  <!-- 1. Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Grizzly Business Systems</p>
+        <h1>Websites built for local businesses.</h1>
+        <p class="lead">Professional websites, ongoing support, and business systems built to grow with the way you work.</p>
+        <p class="area">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          {siteConfig.serviceAreaLine}
+        </p>
+        <div class="hero-actions">
+          <CTAButton size="lg" />
+          <a class="quiet-link" href="#work">See what we build</a>
+        </div>
+      </div>
+      <HeroVisual
+        websiteShot="/work/reli-desktop-640.webp"
+        phoneShot="/work/barestkd-mobile.webp"
+      />
+    </div>
+  </section>
+
+  <!-- 2. Proof first -->
+  <section class="section section--white" id="work" aria-labelledby="work-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our work</span>
+        <h2 id="work-title">Real work for real businesses.</h2>
+        <p class="lead">Live websites and working systems for East Texas businesses, including our own.</p>
+      </div>
+      <div class="project-grid">
+        {featuredProjects.map((p) => <ProjectCard project={p} />)}
+      </div>
+      <p class="more"><a href="/our-work">See all our work <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <!-- 3. The deeper difference -->
+  <section class="section section--ink" aria-labelledby="beginning-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">More than a website</span>
+        <h2 id="beginning-title">Your website is only the beginning.</h2>
+        <p class="lead">Most software asks your business to change the way it works. Grizzly takes the opposite approach. Start with what your business actually needs, then connect the tools around it.</p>
+      </div>
+      <SystemFlow />
+      <p class="brand-line reveal">Technology should fit your business, not the other way around.</p>
+    </div>
+  </section>
+
+  <!-- 4. Product ladder -->
+  <section class="section" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What we do</span>
+        <h2 id="services-title">Start with what you need.</h2>
+        <p class="lead">Most businesses start with a website. Add a CRM, payments, or custom workflows when they solve a real problem.</p>
+      </div>
+      <div class="service-grid">
+        {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+      <p class="more"><a href="/websites-and-systems">How each service works <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <!-- 5. We use this ourselves -->
+  <section class="section section--sand" aria-labelledby="ourselves-title">
+    <div class="container ourselves">
+      <div class="ourselves-copy reveal">
+        <span class="eyebrow">Where Grizzly came from</span>
+        <h2 id="ourselves-title">Built from running a real small business.</h2>
+        <p>Grizzly did not start as a software idea. It started at Bares Taekwondo Fitness, a martial arts school in Tyler, where the software we were paying for did not fit the way the business actually ran.</p>
+        <p>So we built our own systems for the day-to-day work:</p>
+        <ul class="check-list two-col">
+          <li>Member records</li>
+          <li>Scheduling</li>
+          <li>Memberships</li>
+          <li>Payments</li>
+          <li>Checkout</li>
+          <li>Attendance</li>
+          <li>Forms</li>
+          <li>Website connections</li>
+        </ul>
+        <p>Building and using those systems in a real business is what shaped Grizzly.</p>
+        <p class="pull">We don't just build business systems. We run our own business on them.</p>
+        <a href="/our-work#bares-taekwondo">Read the Bares Taekwondo story <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="ourselves-media reveal">
+        <!-- TODO(owner): add a BaresCRM screenshot with customer information removed, e.g. /work/barescrm-dashboard.webp -->
+        <div class="frame">
+          <img src="/work/barestkd-desktop-640.webp" srcset="/work/barestkd-desktop-640.webp 640w, /work/barestkd-desktop.webp 1200w" sizes="(min-width: 960px) 520px, 100vw" width="640" height="400" alt="Bares Taekwondo Fitness website, which connects to the school's own CRM and checkout" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. How it works -->
+  <HowItWorks />
+
+  <!-- 7. Local relationship -->
+  <LocalSupport />
+
+  <!-- 8. Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .hero { padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3.5rem, 8vw, 6rem); overflow: hidden; }
+  .hero-grid { display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .hero-grid { grid-template-columns: 1fr 1.05fr; } }
+  .hero h1 { max-width: 13ch; }
+  .hero .lead { margin-bottom: 1.25rem; }
+  .area { display: flex; align-items: flex-start; gap: 0.5rem; font-weight: 600; color: var(--ink); margin-bottom: 2rem; font-size: 1.05rem; }
+  .area svg { color: var(--bear); margin-top: 0.2rem; flex: none; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .quiet-link { font-weight: 600; color: var(--ink); min-height: 44px; display: inline-flex; align-items: center; }
+
+  .project-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .more { margin: 2rem 0 0; font-weight: 700; }
+
+  .brand-line {
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0; font-family: var(--font-head); font-stretch: 112%; font-weight: 800;
+    font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1.2; color: var(--sand); max-width: 34ch; text-wrap: balance;
+  }
+
+  .service-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+
+  .ourselves { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .ourselves { grid-template-columns: 1fr 1fr; } }
+  .ourselves-copy p { max-width: 36rem; }
+  .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 28rem; margin-bottom: 1.5rem; }
+  .pull {
+    font-family: var(--font-head); font-stretch: 110%; font-weight: 800; font-size: 1.3rem; line-height: 1.3;
+    color: var(--bear); border-left: 4px solid var(--tan); padding-left: 1rem; margin: 1.5rem 0;
+  }
+  .ourselves-copy a { font-weight: 700; }
+  .frame { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--white); }
+</style>

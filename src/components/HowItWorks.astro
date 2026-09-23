@@ -1,0 +1,37 @@
+---
+const steps = [
+  { title: 'Tell us what is not working', body: 'A short call or form. No drawn-out discovery process.' },
+  { title: 'Start with what you actually need', body: 'A website, a CRM, payments, or a combination. Nothing extra.' },
+  { title: 'Build from there', body: 'Add more when it solves a real problem for your business.' },
+];
+---
+<section class="section section--white" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2 id="how-title">Simple from the first conversation.</h2>
+    </div>
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="reveal">
+          <span class="num" aria-hidden="true">{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  li { position: relative; padding-top: 1.25rem; border-top: 3px solid var(--sand-200); }
+  .num {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+    background: var(--olive); color: var(--white); font-family: var(--font-head); font-weight: 800; font-size: 1.15rem;
+    margin-bottom: 1rem;
+  }
+  h3 { margin-bottom: 0.4rem; }
+  li p { color: var(--text-muted); margin: 0; }
+</style>

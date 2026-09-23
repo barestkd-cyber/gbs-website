@@ -1,0 +1,115 @@
+---
+// Device composition for the hero. `websiteShot` / `phoneShot` / `systemShot` take real
+// screenshots under /public; anything not provided falls back to a neutral illustration.
+interface Props { websiteShot?: string; phoneShot?: string; systemShot?: string; caption?: string }
+const { websiteShot, phoneShot, systemShot, caption } = Astro.props;
+---
+<figure class="hero-visual">
+  <div class="browser">
+    <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url"></span></div>
+    <div class="screen">
+      {websiteShot ? <img src={websiteShot} alt="" width="1440" height="900" loading="eager" fetchpriority="high" /> : (
+        <div class="site-mock" aria-hidden="true">
+          <div class="sm-nav"><span class="sm-logo"></span><span></span><span></span><span></span><span class="sm-btn"></span></div>
+          <div class="sm-hero">
+            <div><span class="sm-h1"></span><span class="sm-h1 short"></span><span class="sm-p"></span><span class="sm-p"></span><span class="sm-cta"></span></div>
+            <div class="sm-img"></div>
+          </div>
+          <div class="sm-cards"><span></span><span></span><span></span></div>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="panel" aria-hidden="true">
+    {systemShot ? <img src={systemShot} alt="" /> : (
+      <>
+        <div class="panel-head"><span class="dot"></span>Customers</div>
+        <div class="tabs"><b>Leads</b><span>Contacts</span><span>Calendar</span></div>
+        <ul class="rows">
+          <li><span class="av"></span><span class="ln"></span><em class="pill new">New</em></li>
+          <li><span class="av"></span><span class="ln"></span><em class="pill fu">Follow up</em></li>
+          <li><span class="av"></span><span class="ln"></span><em class="pill ok">Customer</em></li>
+          <li><span class="av"></span><span class="ln"></span><em class="pill ok">Customer</em></li>
+        </ul>
+      </>
+    )}
+  </div>
+
+  <div class="phone" aria-hidden="true">
+    <div class="ph-screen">
+      {phoneShot ? <img src={phoneShot} alt="" width="390" height="844" loading="eager" /> : (
+        <div class="ph-mock">
+          <span class="ph-logo"></span><span class="sm-h1"></span><span class="sm-h1 short"></span><span class="sm-p"></span><span class="sm-p"></span>
+          <span class="ph-form"><span></span><span></span><span></span><b></b></span>
+        </div>
+      )}
+    </div>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .hero-visual { position: relative; margin: 0 auto; padding: 0 0 2.75rem; max-width: 620px; width: 100%; }
+  .browser { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow), 0 30px 60px -30px rgb(89 59 30 / 0.35); border: 1px solid var(--line); overflow: hidden; }
+  .chrome { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--sand-100); border-bottom: 1px solid var(--line); }
+  .chrome i { width: 9px; height: 9px; border-radius: 50%; background: var(--sand-200); }
+  .url { margin-left: 10px; height: 14px; flex: 1; max-width: 55%; border-radius: 7px; background: var(--white); }
+  .screen img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+
+  .site-mock { aspect-ratio: 16 / 10; padding: 4.5% 5%; display: grid; grid-template-rows: auto 1fr auto; gap: 7%; }
+  .sm-nav { display: flex; align-items: center; gap: 5%; }
+  .sm-nav span { height: 6px; width: 9%; border-radius: 3px; background: var(--sand-200); }
+  .sm-nav .sm-logo { width: 14%; height: 12px; background: var(--bear); margin-right: auto; border-radius: 3px; }
+  .sm-nav .sm-btn { width: 13%; height: 14px; background: var(--ink); border-radius: 4px; }
+  .sm-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 7%; align-items: center; }
+  .sm-hero > div:first-child { display: grid; gap: 9px; }
+  .sm-h1 { display: block; height: 13px; border-radius: 4px; background: var(--ink); width: 92%; }
+  .sm-h1.short { width: 62%; }
+  .sm-p { display: block; height: 6px; border-radius: 3px; background: var(--sand-200); width: 85%; }
+  .sm-cta { display: block; margin-top: 6px; height: 18px; width: 45%; border-radius: 4px; background: var(--bear); }
+  .sm-img { aspect-ratio: 4 / 3; border-radius: 6px; background: linear-gradient(160deg, var(--sand) 0%, var(--tan) 55%, var(--bear) 100%); }
+  .sm-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5%; }
+  .sm-cards span { height: 34px; border-radius: 5px; background: var(--sand-100); border: 1px solid var(--line); }
+
+  .panel {
+    position: absolute; right: -4%; bottom: 0; width: 50%; min-width: 210px;
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow), 0 24px 40px -20px rgb(33 34 37 / 0.35); padding: 14px; font-size: 12px;
+  }
+  .panel img { border-radius: 6px; }
+  .panel-head { display: flex; align-items: center; gap: 7px; font-family: var(--font-head); font-weight: 800; font-size: 13px; color: var(--ink); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--olive); }
+  .tabs { display: flex; gap: 12px; margin: 10px 0 8px; padding-bottom: 7px; border-bottom: 1px solid var(--line); color: var(--text-muted); }
+  .tabs b { color: var(--bear); }
+  .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .rows li { display: flex; align-items: center; gap: 8px; }
+  .av { width: 20px; height: 20px; border-radius: 50%; background: var(--sand-200); flex: none; }
+  .ln { flex: 1; height: 7px; border-radius: 4px; background: var(--sand-100); }
+  .pill { font-style: normal; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .pill.new { background: #f3e6d4; color: var(--bear); }
+  .pill.fu { background: var(--olive-100); color: var(--olive); }
+  .pill.ok { background: #e9e9ea; color: var(--ink); }
+
+  .phone {
+    position: absolute; left: -3%; bottom: 0; width: 24%; min-width: 100px; aspect-ratio: 9 / 18.5;
+    background: var(--ink); border-radius: 18px; padding: 5px; box-shadow: 0 24px 40px -18px rgb(33 34 37 / 0.5);
+  }
+  .ph-screen { height: 100%; border-radius: 13px; overflow: hidden; background: var(--cream); }
+  .ph-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .ph-mock { height: 100%; padding: 22px 10px 10px; display: flex; flex-direction: column; gap: 7px; }
+  .ph-mock .sm-h1 { height: 9px; }
+  .ph-mock .sm-p { height: 5px; }
+  .ph-logo { width: 45%; height: 9px; border-radius: 3px; background: var(--bear); margin-bottom: 6px; }
+  .ph-form { margin-top: auto; display: grid; gap: 5px; }
+  .ph-form span { height: 12px; border-radius: 3px; background: var(--white); border: 1px solid var(--line); }
+  .ph-form b { height: 14px; border-radius: 3px; background: var(--bear); }
+
+  figcaption { position: absolute; left: 24%; right: 50%; bottom: 0; padding-left: 1rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.3; }
+
+  @media (max-width: 520px) {
+    .panel { right: 0; width: 60%; min-width: 0; }
+    .phone { left: 0; }
+    figcaption { display: none; }
+  }
+</style>

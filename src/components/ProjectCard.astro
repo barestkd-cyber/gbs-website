@@ -1,0 +1,91 @@
+---
+import type { Project } from '../data/projects';
+interface Props { project: Project; variant?: 'card' | 'case' }
+const { project: p, variant = 'card' } = Astro.props;
+const headingId = `proj-${p.id}`;
+---
+{variant === 'card' ? (
+  <article class="card reveal" aria-labelledby={headingId}>
+    {p.image && (
+      <div class="shot">
+        <img
+          src={p.image.desktopSmall}
+          srcset={`${p.image.desktopSmall} 640w, ${p.image.desktop} 1200w`}
+          sizes="(min-width: 1000px) 360px, (min-width: 640px) 50vw, 100vw"
+          width="640" height="400" alt={p.image.alt} loading="lazy" decoding="async"
+        />
+      </div>
+    )}
+    <div class="body">
+      <ul class="tags">{p.types.map((t) => <li>{t}</li>)}</ul>
+      <h3 id={headingId}>{p.business}</h3>
+      <p class="meta">{p.industry} · {p.location}</p>
+      <p><strong>The need:</strong> {p.problem}</p>
+      <p><strong>What became easier:</strong> {p.result}</p>
+      {p.url && <a class="live" href={p.url} target="_blank" rel="noopener">Visit {p.urlLabel}<span class="visually-hidden"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>}
+    </div>
+  </article>
+) : (
+  <article class="case reveal" id={p.id} aria-labelledby={headingId}>
+    <div class="case-media">
+      {p.image && (
+        <div class="devices">
+          <div class="frame">
+            <img
+              src={p.image.desktopSmall}
+              srcset={`${p.image.desktopSmall} 640w, ${p.image.desktop} 1200w`}
+              sizes="(min-width: 1000px) 560px, 100vw"
+              width="640" height="400" alt={p.image.alt} loading="lazy" decoding="async"
+            />
+          </div>
+          {p.image.mobile && (
+            <div class="mini-phone"><img src={p.image.mobile} width="360" height="779" alt="" loading="lazy" decoding="async" /></div>
+          )}
+        </div>
+      )}
+    </div>
+    <div class="case-body">
+      <ul class="tags">{p.types.map((t) => <li>{t}</li>)}</ul>
+      <h3 id={headingId}>{p.business}</h3>
+      <p class="meta">{p.industry} · {p.location}{p.internal && ' · Our own business'}</p>
+      <dl>
+        <div><dt>Problem</dt><dd>{p.problem}</dd></div>
+        <div><dt>What GBS built</dt><dd>{p.built}</dd></div>
+        {p.builtList && <div class="list"><dt class="visually-hidden">Includes</dt><dd><ul class="check-list">{p.builtList.map((b) => <li>{b}</li>)}</ul></dd></div>}
+        <div><dt>What became easier</dt><dd>{p.result}</dd></div>
+      </dl>
+      {p.url && <a class="live" href={p.url} target="_blank" rel="noopener">Visit {p.urlLabel}<span class="visually-hidden"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>}
+    </div>
+  </article>
+)}
+
+<style>
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+  .shot { aspect-ratio: 16 / 10; background: var(--sand-100); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s ease; }
+  .card:hover .shot img { transform: scale(1.02); }
+  .body { padding: 1.4rem 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.1rem; flex: 1; font-size: 1.02rem; }
+  .body p { margin: 0 0 0.6rem; color: var(--text-muted); }
+  .body strong { color: var(--ink); font-weight: 700; }
+  h3 { margin: 0.4rem 0 0.15rem; }
+  .meta { font-size: 0.95rem; color: var(--olive) !important; font-weight: 600; margin-bottom: 0.8rem !important; }
+  .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tags li { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.2rem 0.6rem; border-radius: 4px; background: var(--sand-100); color: var(--bear); }
+  .live { margin-top: auto; padding-top: 0.5rem; font-weight: 700; display: inline-flex; gap: 0.3rem; align-self: flex-start; min-height: 44px; align-items: center; }
+
+  .case { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; grid-template-columns: 1fr; padding-block: clamp(2.5rem, 5vw, 3.5rem); border-top: 1px solid var(--line); }
+  @media (min-width: 960px) {
+    .case { grid-template-columns: 1.1fr 1fr; }
+    .case:nth-of-type(even) .case-media { order: 2; }
+  }
+  .devices { position: relative; padding-right: 12%; padding-bottom: 6%; }
+  .frame { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--white); aspect-ratio: 16 / 10; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .mini-phone { position: absolute; right: 0; bottom: 0; width: 24%; aspect-ratio: 9 / 19; border-radius: 14px; padding: 4px; background: var(--ink); box-shadow: 0 20px 36px -16px rgb(33 34 37 / 0.5); }
+  .mini-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 10px; }
+  dl { margin: 1rem 0 0.5rem; display: grid; gap: 1rem; }
+  dt { font-family: var(--font-head); font-stretch: 115%; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--olive); }
+  dd { margin: 0.2rem 0 0; }
+  .list dd { margin-top: 0; }
+  .check-list { font-size: 1rem; }
+</style>
