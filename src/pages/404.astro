@@ -1,14 +1,15 @@
 ---
+import { u } from '../lib/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAButton from '../components/CTAButton.astro';
 ---
 <BaseLayout title="Page not found" noindex>
   <section class="nf">
     <div class="container">
-      <img src="/brand/gbs-mark.png" alt="" width="96" height="96" />
+      <img src={u('/brand/gbs-mark.png')} alt="" width="96" height="96" />
       <h1>That page wandered off.</h1>
       <p class="lead">The page you were looking for isn't here. Try one of these instead.</p>
-      <p class="links"><a href="/">Home</a> · <a href="/websites-and-systems">Websites &amp; Systems</a> · <a href="/our-work">Our Work</a></p>
+      <p class="links"><a href={u('/')}>Home</a> · <a href={u('/websites-and-systems')}>Websites &amp; Systems</a> · <a href={u('/our-work')}>Our Work</a></p>
       <CTAButton />
     </div>
   </section>

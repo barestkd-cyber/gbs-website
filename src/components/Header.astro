@@ -1,20 +1,21 @@
 ---
+import { u, stripBase } from '../lib/url';
 import Logo from './Logo.astro';
 import CTAButton from './CTAButton.astro';
 import { navigation } from '../config/site';
-const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const path = stripBase(Astro.url.pathname).replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 <header class="site-header">
   <div class="container bar">
-    <a href="/" class="brand" aria-label="Grizzly Business Systems home">
+    <a href={u('/')} class="brand" aria-label="Grizzly Business Systems home">
       <Logo width={118} eager />
     </a>
 
     <nav class="nav" aria-label="Main">
       <ul>
         {navigation.filter((n) => n.href !== '/').map((item) => (
-          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+          <li><a href={u(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -30,7 +31,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
         <nav aria-label="Mobile">
           <ul>
             {navigation.map((item) => (
-              <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+              <li><a href={u(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
             ))}
           </ul>
         </nav>

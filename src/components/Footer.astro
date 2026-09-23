@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import Logo from './Logo.astro';
 import { siteConfig, navigation } from '../config/site';
 const { contact } = siteConfig;
@@ -7,14 +8,14 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container grid">
     <div class="about">
-      <a href="/" aria-label="Grizzly Business Systems home"><Logo width={150} /></a>
+      <a href={u('/')} aria-label="Grizzly Business Systems home"><Logo width={150} /></a>
       <p>Websites, website care, and business systems for local small businesses.</p>
       <p class="area">{siteConfig.serviceAreaLine}</p>
     </div>
 
     <nav aria-label="Footer">
       <h2 class="col-title">Pages</h2>
-      <ul>{navigation.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+      <ul>{navigation.map((n) => <li><a href={u(n.href)}>{n.label}</a></li>)}</ul>
     </nav>
 
     <div>
@@ -22,7 +23,7 @@ const year = new Date().getFullYear();
       <ul>
         {contact.phone && <li><a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}>{contact.phone}</a></li>}
         {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
-        <li><a href={siteConfig.primaryCTA.href}>{siteConfig.primaryCTA.label}</a></li>
+        <li><a href={u(siteConfig.primaryCTA.href)}>{siteConfig.primaryCTA.label}</a></li>
         <li class="muted">{contact.city}, {contact.region}</li>
       </ul>
     </div>

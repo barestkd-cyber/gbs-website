@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
+import { u } from '../lib/url';
 interface Props { label?: string; href?: string; variant?: 'primary' | 'light' | 'outline'; size?: 'md' | 'lg'; class?: string }
 const {
   label = siteConfig.primaryCTA.label,
@@ -9,7 +10,7 @@ const {
   class: className,
 } = Astro.props;
 ---
-<a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}>
+<a href={u(href)} class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}>
   {label}
   <svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10h11m-4.5-5L15 10l-4.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>

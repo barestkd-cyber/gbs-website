@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../data/projects';
+import { u } from '../lib/url';
 interface Props { project: Project; variant?: 'card' | 'case' }
 const { project: p, variant = 'card' } = Astro.props;
 const headingId = `proj-${p.id}`;
@@ -9,8 +10,8 @@ const headingId = `proj-${p.id}`;
     {p.image && (
       <div class="shot">
         <img
-          src={p.image.desktopSmall}
-          srcset={`${p.image.desktopSmall} 640w, ${p.image.desktop} 1200w`}
+          src={u(p.image.desktopSmall)}
+          srcset={`${u(p.image.desktopSmall)} 640w, ${u(p.image.desktop)} 1200w`}
           sizes="(min-width: 1000px) 360px, (min-width: 640px) 50vw, 100vw"
           width="640" height="400" alt={p.image.alt} loading="lazy" decoding="async"
         />
@@ -32,14 +33,14 @@ const headingId = `proj-${p.id}`;
         <div class="devices">
           <div class="frame">
             <img
-              src={p.image.desktopSmall}
-              srcset={`${p.image.desktopSmall} 640w, ${p.image.desktop} 1200w`}
+              src={u(p.image.desktopSmall)}
+              srcset={`${u(p.image.desktopSmall)} 640w, ${u(p.image.desktop)} 1200w`}
               sizes="(min-width: 1000px) 560px, 100vw"
               width="640" height="400" alt={p.image.alt} loading="lazy" decoding="async"
             />
           </div>
           {p.image.mobile && (
-            <div class="mini-phone"><img src={p.image.mobile} width="360" height="779" alt="" loading="lazy" decoding="async" /></div>
+            <div class="mini-phone"><img src={u(p.image.mobile)} width="360" height="779" alt="" loading="lazy" decoding="async" /></div>
           )}
         </div>
       )}

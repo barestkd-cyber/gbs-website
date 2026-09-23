@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAButton from '../components/CTAButton.astro';
 import HeroVisual from '../components/HeroVisual.astro';
@@ -33,8 +34,8 @@ import { featuredProjects } from '../data/projects';
         </div>
       </div>
       <HeroVisual
-        websiteShot="/work/reli-desktop-640.webp"
-        phoneShot="/work/barestkd-mobile.webp"
+        websiteShot={u('/work/reli-desktop-640.webp')}
+        phoneShot={u('/work/barestkd-mobile.webp')}
       />
     </div>
   </section>
@@ -50,7 +51,7 @@ import { featuredProjects } from '../data/projects';
       <div class="project-grid">
         {featuredProjects.map((p) => <ProjectCard project={p} />)}
       </div>
-      <p class="more"><a href="/our-work">See all our work <span aria-hidden="true">→</span></a></p>
+      <p class="more"><a href={u('/our-work')}>See all our work <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
@@ -78,7 +79,7 @@ import { featuredProjects } from '../data/projects';
       <div class="service-grid">
         {services.map((s) => <ServiceCard service={s} />)}
       </div>
-      <p class="more"><a href="/websites-and-systems">How each service works <span aria-hidden="true">→</span></a></p>
+      <p class="more"><a href={u('/websites-and-systems')}>How each service works <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
@@ -102,12 +103,12 @@ import { featuredProjects } from '../data/projects';
         </ul>
         <p>Building and using those systems in a real business is what shaped Grizzly.</p>
         <p class="pull">We don't just build business systems. We run our own business on them.</p>
-        <a href="/our-work#bares-taekwondo">Read the Bares Taekwondo story <span aria-hidden="true">→</span></a>
+        <a href={u('/our-work#bares-taekwondo')}>Read the Bares Taekwondo story <span aria-hidden="true">→</span></a>
       </div>
       <div class="ourselves-media reveal">
         <!-- TODO(owner): add a BaresCRM screenshot with customer information removed, e.g. /work/barescrm-dashboard.webp -->
         <div class="frame">
-          <img src="/work/barestkd-desktop-640.webp" srcset="/work/barestkd-desktop-640.webp 640w, /work/barestkd-desktop.webp 1200w" sizes="(min-width: 960px) 520px, 100vw" width="640" height="400" alt="Bares Taekwondo Fitness website, which connects to the school's own CRM and checkout" loading="lazy" decoding="async" />
+          <img src={u('/work/barestkd-desktop-640.webp')} srcset={`${u('/work/barestkd-desktop-640.webp')} 640w, ${u('/work/barestkd-desktop.webp')} 1200w`} sizes="(min-width: 960px) 520px, 100vw" width="640" height="400" alt="Bares Taekwondo Fitness website, which connects to the school's own CRM and checkout" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -8,8 +9,8 @@ interface Props { title: string; description?: string; image?: string; noindex?:
 const { title, description = siteConfig.description, image = '/og-image.png', noindex = false } = Astro.props;
 
 const fullTitle = title.includes(siteConfig.businessName) ? title : `${title} | ${siteConfig.businessName}`;
-const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1'), Astro.site).href;
-const ogImage = new URL(image, Astro.site).href;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/').replace(/(.)\/$/, '$1'), Astro.site).href;
+const ogImage = new URL(u(image), Astro.site).href;
 
 const { contact } = siteConfig;
 const jsonLd = {
@@ -17,7 +18,7 @@ const jsonLd = {
   '@type': 'ProfessionalService',
   name: siteConfig.businessName,
   url: siteConfig.url,
-  logo: new URL('/brand/gbs-logo.png', Astro.site).href,
+  logo: new URL(u('/brand/gbs-logo.png'), Astro.site).href,
   image: ogImage,
   description: siteConfig.description,
   address: { '@type': 'PostalAddress', addressLocality: contact.city, addressRegion: contact.region, addressCountry: 'US' },
@@ -39,7 +40,7 @@ const jsonLd = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {(noindex || import.meta.env.PUBLIC_NOINDEX === 'true') && <meta name="robots" content="noindex" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteConfig.businessName} />
@@ -52,11 +53,11 @@ const jsonLd = {
     <meta property="og:image:alt" content="Grizzly Business Systems logo" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href={u('/favicon-32.png')} />
+    <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
+    <link rel="manifest" href={u('/site.webmanifest')} />
     <meta name="theme-color" content="#faf7f1" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={u('/sitemap-index.xml')} />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <script is:inline>document.documentElement.classList.add('js');</script>
