@@ -15,16 +15,16 @@ import { websiteServices, crmProducts } from '../data/services';
 import { featuredProjects } from '../data/projects';
 ---
 <BaseLayout
-  title="Websites for Local Businesses in Tyler & East Texas | Grizzly Business Systems"
-  description="Professional websites, ongoing website care, and business systems for small businesses in Tyler, Whitehouse, Longview, and across East Texas."
+  title="Websites & Business Systems for Small Businesses | Grizzly Business Systems"
+  description="Websites, website care, and business systems like Grizzly CRM for small businesses. Based in Tyler, Texas, and working with businesses in East Texas and beyond."
 >
   <!-- 1. Hero -->
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Grizzly Business Systems</p>
-        <h1>Websites built for local businesses.</h1>
-        <p class="lead">Professional websites, ongoing support, and business systems built to grow with the way you work.</p>
+        <h1>Websites and business systems built around the way you work.</h1>
+        <p class="lead">From a better website to CRM, payments, and custom workflows, Grizzly helps small businesses put the right tools in place without forcing them into somebody else's system.</p>
         <p class="area">
           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
           {siteConfig.serviceAreaLine}
@@ -75,7 +75,7 @@ import { featuredProjects } from '../data/projects';
       <div class="section-head">
         <span class="eyebrow">What we do</span>
         <h2 id="services-title">Start with what you need.</h2>
-        <p class="lead">Most businesses start with a website. Add a CRM, payments, or custom workflows when they solve a real problem.</p>
+        <p class="lead">A website is often the first place to start. Add a CRM, payments, or custom workflows when they solve a real problem.</p>
       </div>
       <div class="families">
         <div class="family" role="group" aria-labelledby="fam-web">
@@ -137,7 +137,7 @@ import { featuredProjects } from '../data/projects';
   .hero { padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3.5rem, 8vw, 6rem); overflow: hidden; }
   .hero-grid { display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: center; grid-template-columns: 1fr; }
   @media (min-width: 960px) { .hero-grid { grid-template-columns: 1fr 1.05fr; } }
-  .hero h1 { max-width: 13ch; }
+  .hero h1 { max-width: 20ch; font-size: clamp(2.3rem, 4.4vw, 3.5rem); }
   .hero .lead { margin-bottom: 1.25rem; }
   .area { display: flex; align-items: flex-start; gap: 0.5rem; font-weight: 600; color: var(--ink); margin-bottom: 2rem; font-size: 1.05rem; }
   .area svg { color: var(--bear); margin-top: 0.2rem; flex: none; }

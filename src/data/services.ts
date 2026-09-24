@@ -40,7 +40,7 @@ export const services: Service[] = [
       'Hosting, security, and backups',
       'Technical updates and small ongoing changes',
       'Basic search visibility and analytics',
-      'Someone local to call when something needs attention',
+      'Someone who knows your setup to call when something needs attention',
     ],
     setupPrice: null,
     monthlyPrice: null,

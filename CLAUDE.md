@@ -6,8 +6,8 @@ Astro static site. The source of truth for positioning, copy, and constraints is
 ## Non-negotiables (blueprint §20)
 
 1. Do not market AI. No "AI-powered", "digital transformation", "cutting-edge", "full-service agency", "we can build anything", "unlimited", "nationwide".
-2. East Texas first: "Serving Tyler, Whitehouse, Longview, and businesses across East Texas."
-3. Websites are the entry point; the hero stays website-focused.
+2. Based in East Texas, not limited to it. General line: "Based in East Texas. Working with small businesses here and beyond." Keep Tyler/East Texas as home base and in local SEO (structured data, About), but never imply out-of-state businesses can't hire Grizzly. Don't say "nationwide" or "serving businesses everywhere".
+3. Company pitch is websites + business systems. Websites are often the entry point, but Grizzly isn't just a website company.
 4. Pricing is setup + monthly. Never add placeholder or invented amounts. Numbers live only in `src/data/services.ts`, and show only when `showPricing` in `src/config/site.ts` is true.
 5. Consulting is not a nav item or page. No standalone SEO page.
 6. Don't call anything a "Grizzly Platform" yet.

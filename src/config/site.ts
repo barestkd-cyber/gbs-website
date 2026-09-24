@@ -7,9 +7,12 @@ export const siteConfig = {
   // TODO(owner): confirm the production domain. Used for canonical URLs, sitemap, and share tags.
   url: 'https://grizzlybusinesssystems.com',
   description:
-    'Websites, website care, and business systems for small businesses in Tyler, Whitehouse, Longview, and across East Texas.',
+    'Websites, website care, and business systems for small businesses. Based in Tyler, Texas, working with businesses in East Texas and beyond.',
+  // East Texas is home base, not a service boundary. City names stay for local SEO (structured data, About page).
   serviceArea: ['Tyler', 'Whitehouse', 'Longview', 'East Texas'],
-  serviceAreaLine: 'Serving Tyler, Whitehouse, Longview, and businesses across East Texas.',
+  serviceAreaLine: 'Based in East Texas. Working with small businesses here and beyond.',
+  footerAreaLine: 'Based in Tyler, Texas. Working with businesses in East Texas and beyond.',
+  localAreaLine: 'Serving local clients throughout Tyler, Whitehouse, Longview, and East Texas, and working with businesses beyond.',
   primaryCTA: { label: 'Tell Us About Your Business', href: '/contact' },
 
   // Flip to true once every service in src/data/services.ts has real numbers.
