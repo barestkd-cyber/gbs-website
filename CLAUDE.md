@@ -16,6 +16,14 @@ Astro static site. The source of truth for positioning, copy, and constraints is
 9. One primary CTA: "Tell Us About Your Business" → `/contact`.
 10. No profanity, no popups, no chat widget, no autoplay, no fake urgency.
 
+## Product naming (supersedes the blueprint's older names)
+
+- Website service: **Website Build + Care**
+- Grizzly CRM product family, in tiers: **Grizzly CRM** → **Grizzly CRM Plus** → **Grizzly CRM Custom**
+- Never use "Grizzly CRM + POS" or "CRM + POS" as a product name. POS is a feature of Plus.
+- Martial arts software is **BaresTKD CRM**, a separate product. It is not a Grizzly CRM tier. Never call it "Grizzly CRM Martial Arts".
+- Descriptive phrases like "custom workflows" or "a CRM with payments and POS" are fine in body copy.
+
 ## Where things live
 
 - `src/config/site.ts`: business name, domain, service area, CTA, `showPricing`, contact details

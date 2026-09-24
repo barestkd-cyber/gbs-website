@@ -47,7 +47,7 @@ export const projects: Project[] = [
     problem:
       'Off-the-shelf school software cost too much and did not match how the school actually runs.',
     built:
-      'A public website with program pages and online checkout, connected to a custom CRM for members, scheduling, payments, and daily operations.',
+      'A public website with program pages and online checkout, connected to BaresTKD CRM, the school’s own system for members, scheduling, payments, and daily operations.',
     result:
       'Members, schedules, agreements, payments, and the website now run on one connected system the school owns.',
     builtList: [

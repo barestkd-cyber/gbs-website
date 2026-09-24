@@ -3,9 +3,9 @@ import type { Service } from '../data/services';
 interface Props { service: Service; detailed?: boolean }
 const { service, detailed = false } = Astro.props;
 ---
-<article class="service reveal" id={detailed ? undefined : `svc-${service.id}`}>
+<article class={`service service--${service.id} reveal`} id={detailed ? undefined : `svc-${service.id}`}>
   <div class="top">
-    <span class="step" aria-hidden="true">0{service.step}</span>
+    <span class="step" aria-hidden="true">{service.step ? `Tier 0${service.step}` : 'Service'}</span>
     <h3>{service.name}</h3>
     <p class="tagline">{service.tagline}</p>
   </div>
@@ -27,9 +27,9 @@ const { service, detailed = false } = Astro.props;
     padding: clamp(1.4rem, 3vw, 1.9rem); height: 100%;
     border-top: 4px solid var(--tan);
   }
-  .service:nth-child(2) { border-top-color: var(--bear); }
-  .service:nth-child(3) { border-top-color: var(--ink); }
-  .service:nth-child(4) { border-top-color: var(--olive); }
+  .service--crm { border-top-color: var(--bear); }
+  .service--crm-plus { border-top-color: var(--ink); }
+  .service--custom { border-top-color: var(--olive); }
   .step {
     display: block; font-family: var(--font-head); font-stretch: 125%; font-weight: 800; font-size: 0.85rem;
     letter-spacing: 0.12em; color: var(--tan); margin-bottom: 0.5rem;

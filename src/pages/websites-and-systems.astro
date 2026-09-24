@@ -4,11 +4,12 @@ import CTAButton from '../components/CTAButton.astro';
 import SystemFlow from '../components/SystemFlow.astro';
 import PricingSection from '../components/PricingSection.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import MartialArtsNote from '../components/MartialArtsNote.astro';
 import { getService } from '../data/services';
 
 const website = getService('website');
 const crm = getService('crm');
-const pos = getService('crm-pos');
+const plus = getService('crm-plus');
 const custom = getService('custom');
 
 const options = ['A website', 'A website with ongoing care', 'A CRM', 'A CRM with payments and POS', 'A connected combination'];
@@ -23,7 +24,7 @@ const careItems = [
 ---
 <BaseLayout
   title="Websites, Website Care & Business Systems in Tyler, TX"
-  description="Websites with ongoing care, Grizzly CRM, and CRM + POS for East Texas small businesses. Start with what you need and add the rest when it makes sense."
+  description="Websites with ongoing care, plus Grizzly CRM, Grizzly CRM Plus, and Grizzly CRM Custom for East Texas small businesses. Start with what you need and add the rest when it makes sense."
 >
   <section class="page-hero">
     <div class="container">
@@ -33,7 +34,7 @@ const careItems = [
       <ul class="options">{options.map((o) => <li>{o}</li>)}</ul>
       <p class="note">Every service stands on its own. You are never required to buy the biggest plan.</p>
       <nav class="jump" aria-label="On this page">
-        <a href="#website">Website</a><a href="#care">Website Care</a><a href="#crm">Grizzly CRM</a><a href="#crm-pos">CRM + POS</a><a href="#custom">Custom workflows</a>
+        <a href="#website">Website Build</a><a href="#care">Website Care</a><a href="#crm">Grizzly CRM</a><a href="#crm-plus">Grizzly CRM Plus</a><a href="#custom">Grizzly CRM Custom</a><a href="#martial-arts">BaresTKD CRM</a>
       </nav>
     </div>
   </section>
@@ -42,7 +43,7 @@ const careItems = [
   <section class="section section--white" id="website" aria-labelledby="website-title">
     <div class="container split">
       <div>
-        <span class="eyebrow">01 · Website</span>
+        <span class="eyebrow">Websites · Build</span>
         <h2 id="website-title">A website that works as hard as you do.</h2>
         <p class="lead">A modern site built for phones first, written in plain language, and set up so customers can reach you.</p>
         <p>We plan the pages with you, help with the writing, and build a site that loads quickly and makes it obvious what to do next: call, book, request a quote, or stop by.</p>
@@ -62,7 +63,7 @@ const careItems = [
   <section class="section" id="care" aria-labelledby="care-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">02 · Website Care</span>
+        <span class="eyebrow">Websites · Care</span>
         <h2 id="care-title">Keep it running without becoming your own web department.</h2>
         <p class="lead">{website.message} Website Care is the monthly plan that keeps your site healthy after launch.</p>
       </div>
@@ -73,11 +74,25 @@ const careItems = [
     </div>
   </section>
 
-  <!-- 3. CRM -->
+  <!-- Grizzly Business Systems: Grizzly CRM → Grizzly CRM Plus → Grizzly CRM Custom -->
+  <section class="family-intro section--ink" aria-labelledby="systems-title">
+    <div class="container">
+      <span class="eyebrow">Grizzly Business Systems</span>
+      <h2 id="systems-title">Grizzly CRM, in three levels.</h2>
+      <p class="lead">A separate product family from our website services. Start with Grizzly CRM, move up to Grizzly CRM Plus when you need payments, and go to Grizzly CRM Custom when the business needs something different. Plenty of customers start with a website and add a CRM later.</p>
+      <ol class="tiers">
+        <li><span>Tier 01</span> {crm.name}</li>
+        <li><span>Tier 02</span> {plus.name}</li>
+        <li><span>Tier 03</span> {custom.name}</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. Grizzly CRM -->
   <section class="section section--white" id="crm" aria-labelledby="crm-title">
     <div class="container split">
       <div>
-        <span class="eyebrow">03 · {crm.name}</span>
+        <span class="eyebrow">Tier 01 · {crm.name}</span>
         <h2 id="crm-title">Your customers and leads in one place.</h2>
         <p class="lead">{crm.message}</p>
         <p>Grizzly CRM gives you one place for the people your business works with: who reached out, who you need to follow up with, and what happened last time. It is set up around the way your business works, not a generic template.</p>
@@ -87,30 +102,33 @@ const careItems = [
     </div>
   </section>
 
-  <!-- 4. CRM + POS -->
-  <section class="section" id="crm-pos" aria-labelledby="pos-title">
+  <!-- 4. Grizzly CRM Plus -->
+  <section class="section" id="crm-plus" aria-labelledby="plus-title">
     <div class="container split">
       <div>
-        <span class="eyebrow">04 · {pos.name}</span>
-        <h2 id="pos-title">Customers and payments in the same system.</h2>
-        <p class="lead">{pos.message}</p>
-        <p>CRM + POS adds selling and payments to the CRM. Take payments in person or online, set up recurring billing, and see every transaction next to the customer it belongs to. Payments are processed through Stripe where appropriate.</p>
+        <span class="eyebrow">Tier 02 · {plus.name}</span>
+        <h2 id="plus-title">Customers and payments in the same system.</h2>
+        <p class="lead">{plus.message}</p>
+        <p>Grizzly CRM Plus adds selling and payments to Grizzly CRM, including point of sale. Take payments in person or online, set up recurring billing, and see every transaction next to the customer it belongs to. Payments are processed through Stripe where appropriate.</p>
         <p class="ladder"><strong>Start with the CRM. Add POS and payments when the business needs them.</strong></p>
       </div>
-      <ul class="check-list feature-box">{pos.features.map((f) => <li>{f}</li>)}</ul>
+      <ul class="check-list feature-box">{plus.features.map((f) => <li>{f}</li>)}</ul>
     </div>
   </section>
 
-  <!-- 5. Custom -->
+  <!-- 5. Grizzly CRM Custom -->
   <section class="section section--white" id="custom" aria-labelledby="custom-title">
     <div class="container split">
       <div>
-        <span class="eyebrow">05 · {custom.name}</span>
-        <h2 id="custom-title">Adapted around the way your business works.</h2>
+        <span class="eyebrow">Tier 03 · {custom.name}</span>
+        <h2 id="custom-title">Built around the way your business works.</h2>
         <p class="lead">{custom.message}</p>
-        <p>Custom work is built on top of Grizzly CRM or CRM + POS, not from scratch. That keeps it dependable and maintainable. Every piece is scoped and agreed on before work starts, so you know what you are getting.</p>
+        <p>Grizzly CRM Custom starts from Grizzly CRM or Grizzly CRM Plus, not from scratch. That keeps it dependable and maintainable. Every piece is scoped and agreed on before work starts, so you know what you are getting.</p>
       </div>
       <ul class="check-list feature-box">{custom.features.map((f) => <li>{f}</li>)}</ul>
+    </div>
+    <div class="container" id="martial-arts">
+      <MartialArtsNote />
     </div>
   </section>
 
@@ -152,5 +170,12 @@ const careItems = [
   .care-grid h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
   .care-grid p { margin: 0; color: var(--text-muted); font-size: 1.02rem; }
   .structure { margin-top: 2rem; padding: 1rem 1.25rem; background: var(--olive-100); border-radius: var(--radius); max-width: 52rem; font-size: 1.02rem; }
+  .family-intro { padding-block: clamp(3rem, 7vw, 4.5rem); }
+  .tiers { list-style: none; margin: 1.75rem 0 0; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .tiers li {
+    padding: 1rem 1.2rem; border-radius: var(--radius-lg); border: 1px solid rgb(255 255 255 / 0.14); background: rgb(255 255 255 / 0.06);
+    font-family: var(--font-head); font-stretch: 110%; font-weight: 800; font-size: 1.15rem; color: var(--white);
+  }
+  .tiers span { display: block; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.2rem; }
   .ladder { font-family: var(--font-head); font-size: 1.15rem; color: var(--bear); border-left: 4px solid var(--tan); padding-left: 1rem; }
 </style>

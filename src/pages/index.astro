@@ -9,8 +9,9 @@ import ServiceCard from '../components/ServiceCard.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import LocalSupport from '../components/LocalSupport.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import MartialArtsNote from '../components/MartialArtsNote.astro';
 import { siteConfig } from '../config/site';
-import { services } from '../data/services';
+import { websiteServices, crmProducts } from '../data/services';
 import { featuredProjects } from '../data/projects';
 ---
 <BaseLayout
@@ -76,9 +77,17 @@ import { featuredProjects } from '../data/projects';
         <h2 id="services-title">Start with what you need.</h2>
         <p class="lead">Most businesses start with a website. Add a CRM, payments, or custom workflows when they solve a real problem.</p>
       </div>
-      <div class="service-grid">
-        {services.map((s) => <ServiceCard service={s} />)}
+      <div class="families">
+        <div class="family" role="group" aria-labelledby="fam-web">
+          <p class="family-label" id="fam-web">Websites</p>
+          <div class="family-cards">{websiteServices.map((s) => <ServiceCard service={s} />)}</div>
+        </div>
+        <div class="family family--crm" role="group" aria-labelledby="fam-crm">
+          <p class="family-label" id="fam-crm">Grizzly Business Systems</p>
+          <div class="family-cards">{crmProducts.map((s) => <ServiceCard service={s} />)}</div>
+        </div>
       </div>
+      <MartialArtsNote />
       <p class="more"><a href={u('/websites-and-systems')}>How each service works <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
@@ -143,7 +152,17 @@ import { featuredProjects } from '../data/projects';
     font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1.2; color: var(--sand); max-width: 34ch; text-wrap: balance;
   }
 
-  .service-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+  .families { display: grid; gap: 2rem 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 1080px) { .families { grid-template-columns: 1fr 3fr; } }
+  .family { display: flex; flex-direction: column; }
+  .family-label {
+    margin: 0 0 0.9rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--line);
+    font-family: var(--font-head); font-stretch: 120%; font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink);
+  }
+  .family--crm .family-label { border-bottom-color: var(--bear); }
+  .family-cards { display: grid; gap: 1.25rem; flex: 1; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+  @media (min-width: 1080px) { .family--crm .family-cards { grid-template-columns: repeat(3, 1fr); } }
 
   .ourselves { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; grid-template-columns: 1fr; }
   @media (min-width: 960px) { .ourselves { grid-template-columns: 1fr 1fr; } }
